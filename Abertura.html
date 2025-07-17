@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página inicial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+    .logo {
+      text-align: center;
+      margin: 30px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 5px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .logo img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+    .link-container {
+      display: flex;
+      align-items: center;
+      margin: 15px auto;
+      width: 80%;
+      max-width: 400px;
+      padding: 12px 15px;
+      border-radius: 50px;
+      background-color: #f5f5f5;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .link-container:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .link-icon {
+      width: 28px;
+      height: 28px;
+      margin-right: 15px;
+      object-fit: contain;
+    }
+    .link-text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+    <div class="logo">
+      <!-- Substitua por seu SVG ou imagem com fundo transparente -->
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAxMm0tMTAgMGExMCAxMCAwIDEgMCAyMCAwYTEwIDEwIDAgMSAwIC0yMCAwIi8+PHBhdGggZD0iTTEyIDEybC0zIC0zIi8+PHBhdGggZD0iTTEyIDEydjYiLz48cGF0aCBkPSJNMTIgMTJsMyAtMyIvPjxwYXRoIGQ9Ik0xMiAxMmwtMyAzIi8+PHBhdGggZD0iTTEyIDEybDMgMyIvPjwvc3ZnPg==" alt="Logo do Restaurante" />
+    </div>
+    
+    <!-- Link para o Site -->
+    <a href="https://www.seurestaurante.com" target="_blank" class="link-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Site" class="link-icon">
+      <span class="link-text">Visite nosso Site</span>
+    </a>
+    
+    <!-- Link para Instagram -->
+    <a href="https://www.instagram.com/seurestaurante" target="_blank" class="link-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="link-icon">
+      <span class="link-text">Siga-nos no Instagram</span>
+    </a>
+    
+    <!-- Link para WhatsApp -->
+    <a href="https://wa.me/5511999999999" target="_blank" class="link-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="WhatsApp" class="link-icon">
+      <span class="link-text">Fale conosco no WhatsApp</span>
+    </a>
+    
+    <!-- Link para Localização -->
+    <a href="https://maps.google.com/?q=Endereço+do+Restaurante" target="_blank" class="link-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Localização" class="link-icon">
+      <span class="link-text">Nossa Localização</span>
+    </a>
+    
+    <!-- Link para Facebook -->
+    <a href="https://www.facebook.com/seurestaurante" target="_blank" class="link-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="link-icon">
+      <span class="link-text">Curta nossa página no Facebook</span>
+    </a>
+</body>
+</html>
