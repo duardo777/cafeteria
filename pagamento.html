@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pagamento - Cafeteria Natureza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80') no-repeat center/cover fixed;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 253, 245, 0.9);
+      z-index: -1;
+    }
+    
+    .content {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-top: 15px;
+    }
+    
+    .back-btn {
+      background: #59271e;
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn:hover {
+      background: #662809;
+      transform: scale(1.1);
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      flex-grow: 1;
+      color: #004b50;
+      margin: 0;
+    }
+    
+    .payment-card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0, 75, 80, 0.1);
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #662809;
+      display: flex;
+      align-items: center;
+    }
+    
+    .card-title svg {
+      margin-right: 10px;
+    }
+    
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #eee;
+    }
+    
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid #eee;
+      font-weight: 700;
+      font-size: 18px;
+      color: #157655;
+    }
+    
+    .payment-options {
+      margin-bottom: 30px;
+    }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid #eee;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    }
+    
+    .payment-option:hover {
+      border-color: #157655;
+      transform: translateY(-2px);
+    }
+    
+    .payment-option.selected {
+      border-color: #157655;
+      background: rgba(21, 118, 85, 0.05);
+    }
+    
+    .payment-icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 15px;
+      object-fit: contain;
+    }
+    
+    .payment-name {
+      flex-grow: 1;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .checkmark {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .checkmark::after {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background: #157655;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .payment-option.selected .checkmark::after {
+      opacity: 1;
+    }
+    
+    .payment-option.selected .checkmark {
+      border-color: #157655;
+    }
+    
+    .pay-button {
+      width: 100%;
+      padding: 18px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(to right, #157655, #004b50);
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(21, 118, 85, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .pay-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(21, 118, 85, 0.4);
+    }
+    
+    /* Barra de navegação fixa - Estilo original */
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(21, 118, 85, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      z-index: 1000;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-item:hover {
+      color: #FFD700;
+      transform: translateY(-3px);
+    }
+    
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+      filter: brightness(0) invert(1);
+    }
+    
+    .nav-item:hover .nav-icon {
+      filter: brightness(0) invert(79%) sepia(41%) saturate(927%) hue-rotate(360deg) brightness(105%) contrast(103%);
+    }
+    
+    /* Ajuste de margem para o conteúdo principal */
+    .content {
+      padding-bottom: 80px;
+    }
+    
+    /* Animação de pulsação para o botão */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    .pay-button {
+      animation: pulse 2s infinite;
+    }
+</style>
+</head>
+<body>
+  <div class="content">
+    <div class="header">
+      <button class="back-btn" onclick="window.history.back()">←</button>
+      <h1 class="page-title">Pagamento</h1>
+      <div style="width: 40px;"></div>
+    </div>
+    
+    <div class="payment-card">
+      <h3 class="card-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 12H15" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 16H15" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 12H9.01" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 16H9.01" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Seu Pedido
+      </h3>
+      
+      <div class="order-item">
+        <span>Expresso Natureza</span>
+        <span>R$ 8,90</span>
+      </div>
+      
+      <div class="order-item">
+        <span>Bolo de Cenoura Vegano</span>
+        <span>R$ 9,50</span>
+      </div>
+      
+      <div class="order-item">
+        <span>Taxa de serviço</span>
+        <span>R$ 2,00</span>
+      </div>
+      
+      <div class="order-total">
+        <span>Total</span>
+        <span>R$ 20,40</span>
+      </div>
+    </div>
+    
+    <div class="payment-options">
+      <h3 class="card-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 9V5H4V9" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 15V19H20V15" stroke="#662809" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="2" y="9" width="20" height="6" rx="1" stroke="#662809" stroke-width="2"/>
+        </svg>
+        Método de Pagamento
+      </h3>
+      
+      <div class="payment-option selected">
+        <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" class="payment-icon">
+        <span class="payment-name">Cartão de Crédito</span>
+        <div class="checkmark"></div>
+      </div>
+      
+      <div class="payment-option">
+        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489138.png" class="payment-icon">
+        <span class="payment-name">PIX</span>
+        <div class="checkmark"></div>
+      </div>
+      
+      <div class="payment-option">
+        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489193.png" class="payment-icon">
+        <span class="payment-name">Dinheiro</span>
+        <div class="checkmark"></div>
+      </div>
+    </div>
+    
+    <button class="pay-button">Confirmar Pagamento</button>
+  </div>
+  
+  <div class="navbar">
+    <a href="Abertura.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" class="nav-icon">
+      <span>Início</span>
+    </a>
+    <a href="cardapio.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/878/878052.png" class="nav-icon">
+      <span>Cardápio</span>
+    </a>
+    <a href="pagamento.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/272/272525.png" class="nav-icon">
+      <span>Pagamento</span>
+    </a>
+    <a href="perfil.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="nav-icon">
+      <span>Perfil</span>
+    </a>
+  </div>
+</body>
+</html>

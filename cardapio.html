@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cardápio - Cafeteria Natureza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center/cover fixed;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 248, 240, 0.85);
+      z-index: -1;
+    }
+    
+    .content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-top: 10px;
+    }
+    
+    .back-btn {
+      background: #157655;
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .back-btn:hover {
+      background: #004b50;
+      transform: scale(1.1);
+    }
+    
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      flex-grow: 1;
+      color: #59271e;
+      margin: 0;
+    }
+    
+    .menu-container {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 5px 25px rgba(89, 39, 30, 0.1);
+    }
+    
+    .menu-category {
+      margin-bottom: 35px;
+    }
+    
+    .category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px dashed #157655;
+      color: #662809;
+    }
+    
+    .menu-item {
+      display: flex;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    .menu-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(102, 40, 9, 0.1);
+      background: white;
+    }
+    
+    .item-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-right: 15px;
+      border: 2px solid rgba(89, 39, 30, 0.1);
+      align-self: center;
+    }
+    
+    .item-details {
+      flex-grow: 1;
+    }
+    
+    .item-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #59271e;
+      font-size: 17px;
+    }
+    
+    .item-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    
+    .item-price {
+      font-weight: 700;
+      color: #157655;
+      font-size: 16px;
+    }
+    
+    .add-to-cart {
+      background: #662809;
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      align-self: center;
+      transition: all 0.3s ease;
+      font-size: 18px;
+    }
+    
+    .add-to-cart:hover {
+      background: #59271e;
+      transform: scale(1.1) rotate(90deg);
+    }
+    
+    /* Barra de navegação fixa - Estilo original */
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(21, 118, 85, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      z-index: 1000;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-item:hover {
+      color: #FFD700;
+      transform: translateY(-3px);
+    }
+    
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+      filter: brightness(0) invert(1);
+    }
+    
+    .nav-item:hover .nav-icon {
+      filter: brightness(0) invert(79%) sepia(41%) saturate(927%) hue-rotate(360deg) brightness(105%) contrast(103%);
+    }
+    
+    /* Ajuste de margem para o conteúdo principal */
+    .content {
+      padding-bottom: 80px;
+    }
+    
+    /* Animação para itens do menu */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .menu-item {
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    
+    .menu-item:nth-child(1) { animation-delay: 0.1s; }
+    .menu-item:nth-child(2) { animation-delay: 0.2s; }
+    .menu-item:nth-child(3) { animation-delay: 0.3s; }
+    .menu-item:nth-child(4) { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+  <div class="content">
+    <div class="header">
+      <button class="back-btn" onclick="window.history.back()">←</button>
+      <h1 class="page-title">Cardápio</h1>
+      <div style="width: 40px;"></div>
+    </div>
+    
+    <div class="menu-container">
+      <div class="menu-category">
+        <h2 class="category-title">Cafés Especiais</h2>
+        
+        <div class="menu-item">
+          <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="item-image">
+          <div class="item-details">
+            <div class="item-name">Expresso Natureza</div>
+            <div class="item-description">Café expresso intenso com notas de chocolate e nozes, cultivado de forma sustentável</div>
+            <div class="item-price">R$ 8,90</div>
+          </div>
+          <button class="add-to-cart">+</button>
+        </div>
+        
+        <div class="menu-item">
+          <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="item-image">
+          <div class="item-details">
+            <div class="item-name">Cappuccino Orgânico</div>
+            <div class="item-description">Café com leite vaporizado e espuma de leite, polvilhado com canela e cacau</div>
+            <div class="item-price">R$ 12,50</div>
+          </div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+      
+      <div class="menu-category">
+        <h2 class="category-title">Pães e Bolos</h2>
+        
+        <div class="menu-item">
+          <img src="https://images.unsplash.com/photo-1608190003443-86a8cd7a5dfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="item-image">
+          <div class="item-details">
+            <div class="item-name">Pão de Queijo Artesanal</div>
+            <div class="item-description">Feito com queijo minas frescal e polvilho azedo, assado na hora</div>
+            <div class="item-price">R$ 6,90</div>
+          </div>
+          <button class="add-to-cart">+</button>
+        </div>
+        
+        <div class="menu-item">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1089&q=80" class="item-image">
+          <div class="item-details">
+            <div class="item-name">Bolo de Cenoura Vegano</div>
+            <div class="item-description">Feito com ingredientes 100% vegetais e cobertura de chocolate belga</div>
+            <div class="item-price">R$ 9,50</div>
+          </div>
+          <button class="add-to-cart">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="navbar">
+    <a href="Abertura.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" class="nav-icon">
+      <span>Início</span>
+    </a>
+    <a href="cardapio.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/878/878052.png" class="nav-icon">
+      <span>Cardápio</span>
+    </a>
+    <a href="pagamento.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/272/272525.png" class="nav-icon">
+      <span>Pagamento</span>
+    </a>
+    <a href="perfil.html" class="nav-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="nav-icon">
+      <span>Perfil</span>
+    </a>
+  </div>
+</body>
+</html>
